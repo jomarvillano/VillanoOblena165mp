@@ -17,6 +17,8 @@ class newCategoryAdmin(admin.ModelAdmin):
 
 class newCrimeAdmin(admin.ModelAdmin):
 	model = Crime
+	list_display = ('criminal', 'classification', 'time', 'place')
+	list_filter = ['classification', 'place']
 
 admin.site.register(Location, newLocationAdmin)
 admin.site.register(Suspect, newSuspectAdmin)

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		  <style> /*EDIT CSS*/
+		    body {
+		      text-align: left;
+		      background-size: cover;
+		      background-position: center;
+		      background-color: black;
+		      color: white;
+		      font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+		    }
+		    p {
+		      font-size: 22px;
+		    }
+		    input {
+		      border: 0;
+		      padding: 10px;
+		      font-size: 18px;
+		    }
+		    input[type="submit"] {
+		      background: red;
+		      color: white;
+		    }
+		    h1{
+		    	font-family:'Helvetica Neue',Helvetica,'lucida grande',tahoma,verdana,arial,serif;
+		    	font-size: 100px;
+		    	color: #EE5D6F;
+		    }
+		    
+		    select {
+      			border: 0 ;
+     			-webkit-appearance: none;  
+     			-moz-appearance: none; 
+     			border: 0;
+		      	padding: 10px;
+		      	font-size: 18px;
+		      	color: black;
+  			}
+
+		  </style>
+		</head>
+		
+<!-- ############################################################################## -->
+
+		<body>
+			<h1>ADD!</h1>
+			<form method='POST' action = ''> {% csrf_token %}
+				{{form.as_p}}
+			
+			<input type='submit'>
+		</body>
+
+<!-- ############################################################################## -->
+	</html>
