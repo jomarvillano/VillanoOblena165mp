@@ -6,7 +6,8 @@
 		      text-align: left;
 		      background-size: cover;
 		      background-position: center;
-		      color: black;
+		      background-color: black;
+		      color: white;
 		      font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
 		    }
 		    p {
@@ -46,8 +47,8 @@
 			<h1>Add New Data:</h1>
 			<h2>
 			<ul>
-				<li><a href="{% url 'records:addcrime' %}">Add Crime</a></li>
-				<li><a href="{% url 'records:addsuspect' %}">Add Suspect</a></li>
+				<li><a href="{% url 'records:addcrime' %}">Add Suspect</a></li>
+				<li><a href="{% url 'records:addsuspect' %}">Add Crime</a></li>
 				<li><a href="{% url 'records:addagent' %}">Add Agent</a></li>
 			</ul>
 			</h2>

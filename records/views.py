@@ -12,7 +12,12 @@ def addagent(request):
 		save_it = form.save(commit=False)
 		save_it.save()
 
-	return render_to_response("forms.html", locals(), context_instance=RequestContext(request))
+	context = {'title': 'Add Agent',
+			'form' : form,
+	}
+
+
+	return render_to_response("forms.html", context, context_instance=RequestContext(request))
 
 def addsuspect(request):
 	form = newSuspectForm(request.POST or None)
@@ -21,7 +26,11 @@ def addsuspect(request):
 		save_it = form.save(commit=False)
 		save_it.save()
 
-	return render_to_response("forms.html", locals(), context_instance=RequestContext(request))
+	context = {'title': 'Add Suspect',
+			'form' : form,
+	}
+
+	return render_to_response("forms.html", context, context_instance=RequestContext(request))
 
 def addcrime(request):
 	form = newCrimeForm(request.POST or None)
@@ -30,4 +39,8 @@ def addcrime(request):
 		save_it = form.save(commit=False)
 		save_it.save()
 
-	return render_to_response("forms.html", locals(), context_instance=RequestContext(request))
+	context = {'title': 'Add Crime',
+			'form' : form,
+	}
+
+	return render_to_response("forms.html", context, context_instance=RequestContext(request))
