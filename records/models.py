@@ -16,12 +16,15 @@ class Location(models.Model):
 class Agent(models.Model):
 	name = models.CharField(max_length = 100)
 	place = models.ForeignKey(Location, default = None, on_delete=models.SET_DEFAULT)
+	race = models.CharField(max_length = 100)
+	policeid = models.CharField(max_length = 100)
 	def __unicode__(self):
 		return self.name
 
 class Suspect(models.Model):
 	name = models.CharField(max_length = 100)
 	place = models.ForeignKey(Location, default = None, on_delete=models.SET_DEFAULT)
+	race = models.CharField(max_length = 100)
 	def __unicode__(self):
 		return self.name
 

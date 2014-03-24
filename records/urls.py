@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from records import views
 
 urlpatterns = patterns('',
-	url(r'^$', 'records.views.home', name='index'),
+	url(r'^$', 'records.views.addindex', name='index'),
 	url(r'^addagent/$', 'records.views.addagent', name='addagent'),
 	url(r'^addsuspect/$', 'records.views.addsuspect', name='addcrime'),
 	url(r'^addcrime/$', 'records.views.addcrime', name='addsuspect'),

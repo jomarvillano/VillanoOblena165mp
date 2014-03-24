@@ -1,0 +1,14 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+<!-- ############################################################################## -->
+	<h1>Add New Data:</h1>
+	<h2>
+	<ul>
+		<li><a href="{% url 'records:addcrime' %}">Add Suspect</a></li>
+		<li><a href="{% url 'records:addsuspect' %}">Add Crime</a></li>
+		<li><a href="{% url 'records:addagent' %}">Add Agent</a></li>
+	</ul>
+	</h2>
+<!-- ############################################################################## -->
+{% endblock %}

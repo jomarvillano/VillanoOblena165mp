@@ -88,3 +88,19 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS=(
     os.path.join(BASE_DIR, "static", "templates"),
 )
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, "static", "static"),
+)
+
+if DEBUG:
+    MEDIA_URL = '/media/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+    STATIC_DIRS = (
+        os.path.join(BASE_DIR, "static", "static"),
+        )
+    BOOTSTRAP=(
+        os.path.join(BASE_DIR, "static", "bootstrap"),
+    )
