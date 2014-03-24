@@ -1,0 +1,15 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+<!-- ############################################################################## -->
+{% if agent_list %}
+    <ul>
+    {% for agent in agent_list %}
+		<h2><li><a href="{% url 'records:editagent' agent.id %}">{{agent.name}}</a></li><h2>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No agents are available.</p>
+{% endif %}
+<!-- ############################################################################## -->
+{% endblock %}

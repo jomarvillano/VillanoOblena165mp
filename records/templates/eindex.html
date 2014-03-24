@@ -2,12 +2,12 @@
 
 {% block content %}
 <!-- ############################################################################## -->
-	<h1>Add New Data:</h1>
+	<h1>Edit Existing Data:</h1>
 	<h2>
 	<ul>
-		<li><a href="{% url 'records:addcrime' %}">Add Suspect</a></li>
-		<li><a href="{% url 'records:addsuspect' %}">Add Crime</a></li>
-		<li><a href="{% url 'records:addagent' %}">Add Agent</a></li>
+		<li><a href="{% url 'records:listagent' %}">Edit Agent</a></li>
+		<li><a href="{% url 'records:listsuspect' %}">Edit Suspect</a></li>
+		<li><a href="{% url 'records:listcrime' %}">Edit Crime</a></li>
 	</ul>
 	</h2>
 <!-- ############################################################################## -->

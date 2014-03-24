@@ -1,55 +1,159 @@
-from django.shortcuts import render, render_to_response, RequestContext, HttpResponseRedirect
-from .forms import newAgentForm, newSuspectForm, newCrimeForm
+from django.shortcuts import render, render_to_response, RequestContext, HttpResponseRedirect, get_object_or_404
+from .forms import *
 from django.contrib import messages
+from .models import *
+from django.views import generic
 # Create your views here.
 
 def home(request):
 	return render_to_response("home.html", locals(), context_instance=RequestContext(request))
 
+#------------------------------------------------------------------------------------------#
+ 	#Edit and Add Views
+#------------------------------------------------------------------------------------------#
 def addindex(request):
-	return render_to_response("index.html", locals(), context_instance=RequestContext(request))
+	return render_to_response("cindex.html", locals(), context_instance=RequestContext(request))
 
-def addagent(request):
-	form = newAgentForm(request.POST or None)
+def editindex(request):
+	return render_to_response("eindex.html", locals(), context_instance=RequestContext(request))
 
-	if form.is_valid():
-		save_it = form.save(commit=False)
-		save_it.save()
-		messages.success(request, "Successfully added.")
-		return HttpResponseRedirect('')
+def editagent(request, id=None):
+	if id:
+		agent = get_object_or_404(Agent, pk=id)
+	else:
+		agent = Agent()
 
-	context = {'title': 'Add Agent',
-			'form' : form,
-	}
+	if request.POST:
+		form = AgentForm(request.POST, instance=agent)
+		if form.is_valid():
+			save_it = form.save(commit=False)
+			save_it.save()
+			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
+			return HttpResponseRedirect('')
+	else:
+		form = AgentForm(instance=agent)
 
-	return render_to_response("forms.html", context, context_instance=RequestContext(request))
+	if id:
+		context = {'title': 'Edit Agent Page',
+				'form' : form,
+		}
+	else:
+		context = {'title': 'New Agent',
+				'form' : form,
+		}
 
-def addsuspect(request):
-	form = newSuspectForm(request.POST or None)
+	return render_to_response('forms.html', context, context_instance=RequestContext(request))
 
-	if form.is_valid():
-		save_it = form.save(commit=False)
-		save_it.save()
-		messages.success(request, "Successfully added.")
-		return HttpResponseRedirect('')
+def editcrime(request, id=None):
+	if id:
+		crime = get_object_or_404(Crime, pk=id)
+	else:
+		crime = Crime()
 
-	context = {'title': 'Add Suspect',
-			'form' : form,
-	}
+	if request.POST:
+		form = CrimeForm(request.POST, instance=crime)
+		if form.is_valid():
+			save_it = form.save(commit=False)
+			save_it.save()
+			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
+			return HttpResponseRedirect('')
+	else:
+		form = CrimeForm(instance=crime)
 
-	return render_to_response("forms.html", context, context_instance=RequestContext(request))
+	if id:
+		context = {'title': 'Edit Crime Entry',
+				'form' : form,
+		}
+	else:
+		context = {'title': 'New Crime Entry',
+				'form' : form,
+		}
 
-def addcrime(request):
-	form = newCrimeForm(request.POST or None)
+	return render_to_response('forms.html', context, context_instance=RequestContext(request))
 
-	if form.is_valid():
-		save_it = form.save(commit=False)
-		save_it.save()
-		messages.success(request, "Successfully added.")
-		return HttpResponseRedirect('')
+def editsuspect(request, id=None):
+	if id:
+		suspect = get_object_or_404(Suspect, pk=id)
+	else:
+		suspect = Suspect()
 
-	context = {'title': 'Add Crime',
-			'form' : form,
-	}
+	if request.POST:
+		form = SuspectForm(request.POST, instance=suspect)
+		if form.is_valid():
+			save_it = form.save(commit=False)
+			save_it.save()
+			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
+			return HttpResponseRedirect('')
+	else:
+		form = SuspectForm(instance=suspect)
 
-	return render_to_response("forms.html", context, context_instance=RequestContext(request))
+	if id:
+		context = {'title': 'Edit Suspect Page',
+				'form' : form,
+		}
+	else:
+		context = {'title': 'New Suspect',
+				'form' : form,
+		}
+
+
+	return render_to_response('forms.html', context, context_instance=RequestContext(request))
+
+#------------------------------------------------------------------------------------------#
+	#Read
+#------------------------------------------------------------------------------------------#
+class AgentList(generic.ListView):
+	template_name = 'view.html'
+	context_object_name = 'agent_list'
+	
+	def get_queryset(self):
+		return Agent.objects.all().order_by('name')
+
+class SuspectList(generic.ListView):
+	template_name = 'view.html'
+	context_object_name = 'agent_list'
+	
+	def get_queryset(self):
+		return Suspect.objects.all().order_by('name')   
+
+class CrimeList(generic.ListView):
+	template_name = 'view.html'
+	context_object_name = 'agent_list'
+	
+	def get_queryset(self):
+		return Crime.objects.all().order_by('name')       
+
+#------------------------------------------------------------------------------------------#
+	#Old form views
+#------------------------------------------------------------------------------------------#
+# def addsuspect(request):
+# 	form = newSuspectForm(request.POST or None)
+
+# 	if form.is_valid():
+# 		save_it = form.save(commit=False)
+# 		save_it.save()
+# 		messages.success(request, "Successfully added.")
+# 		return HttpResponseRedirect('')
+
+# 	context = {'title': 'Enter New Suspect',
+# 			'form' : form,
+# 	}
+
+# 	return render_to_response("forms.html", context, context_instance=RequestContext(request))
+
+# def addcrime(request):
+# 	form = newCrimeForm(request.POST or None)
+
+# 	if form.is_valid():
+# 		save_it = form.save(commit=False)
+# 		save_it.save()
+# 		messages.success(request, "Successfully added.")
+# 		return HttpResponseRedirect('')
+
+# 	context = {'title': 'Report New Crime',
+# 			'form' : form,
+# 	}
+
+# 	return render_to_response("forms.html", context, context_instance=RequestContext(request))
+
+#------------------------------------------------------------------------------------------#
