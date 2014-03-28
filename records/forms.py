@@ -1,6 +1,6 @@
 from django import forms
 from django.views.generic.edit import UpdateView
-from .models import Agent, Suspect, Crime, Location
+from .models import Agent, Suspect, Crime, Location, News
 
 class AgentForm(forms.ModelForm):
 	class Meta:
@@ -13,3 +13,11 @@ class SuspectForm(forms.ModelForm):
 class CrimeForm(forms.ModelForm):
 	class Meta:
 		model = Crime
+
+class NewsForm(forms.ModelForm):
+	class Meta:
+		model = News
+
+class LocationForm(forms.ModelForm):
+	class Meta:
+		model = News

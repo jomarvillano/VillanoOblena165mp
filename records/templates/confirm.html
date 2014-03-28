@@ -1,0 +1,32 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+<!-- ############################################################################## -->
+	<div class = "container">
+		{% if messages %}
+		<div class='row'>
+			<div class="col-xs-12" style="margin-top: 20px;">
+				{% for message in messages %}
+				<p{% if message.tags == 'success' %} class="alert alert-success"{% endif %}>{{ message }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+
+    <div class="col-md-4">
+        <h1>Are you sure you want to delete {{type}} {{name}} {{date}} ?</h1>
+        
+        <center>
+	        <h4>Deleting a record will be irreversible. Do you want to continue?</h4>
+	        {% if type == 'agent' %}
+	        	<p><a class="btn btn-lg btn-warning btn-block" href="{% url 'records:deleteagent' id %}" role="button">DELETE AGENT</a></p>
+			{% elif type == 'suspect' %}
+	        	<p><a class="btn btn-lg btn-warning btn-block" href="{% url 'records:deletesuspect' id %}" role="button">DELETE SUSPECT</a></p>
+			{% elif type == 'crime' %}		
+	        	<p><a class="btn btn-lg btn-warning btn-block" href="{% url 'records:deletecrime' id %}" role="button">DELETE CRIME</a></p>
+	        {% endif %}
+	        <p><a class="btn btn-lg btn-danger btn-block" href="{% url 'records:deleteindex' %}" role="button">NO</a></p>
+    	</center>
+    </div> <!-- container -->
+<!-- ############################################################################## -->
+{% endblock %}

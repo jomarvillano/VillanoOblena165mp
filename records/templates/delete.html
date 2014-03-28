@@ -2,7 +2,6 @@
 
 {% block content %}
 <!-- ############################################################################## -->
-<h2>VIEW</h2>
 
 {% if agent_list %}
     <table class="table table-hover">
@@ -14,7 +13,7 @@
 
     {% for agent in agent_list %}
     </tr>
-		<td><a href="#">{{agent.name}}</a></td>
+		<td><a href="{% url 'records:confirmagent' agent.id %}">{{agent.name}}</a></td>
         <td>{{agent.policeid}}</td>
         <td>{{agent.place}}</td>
 	</tr>
@@ -34,7 +33,7 @@
 
     {% for suspect in suspect_list %}
     <tr>
-		<td><a href="#">{{suspect.name}}</a></td>
+		<td><a href="{% url 'records:confirmsuspect' suspect.id %}">{{suspect.name}}</a></td>
         <td>{{suspect.place}}</td>
 	</tr>
     {% endfor %}
@@ -54,7 +53,7 @@
 
     {% for crime in crime_list %}
 		<tr>
-			<td><a href="#">{{crime.classification}}</td>
+			<td><a href="{% url 'records:confirmcrime' crime.id %}">{{crime.classification}}</td>
 			<td>{{crime.time}}</td></a>
             <td>{{crime.criminal}} </td>
 		</tr>

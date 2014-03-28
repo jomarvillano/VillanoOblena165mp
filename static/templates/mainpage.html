@@ -21,7 +21,7 @@
 
 <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,18 +35,18 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'records:viewindex' %}">View</a></li>  
             <li><a href="{% url 'records:addindex' %}">Create</a></li>
             <li><a href="{% url 'records:editindex' %}">Edit</a></li>
-            <li><a href="#contact">Delete</a></li>
+            <li><a href="{% url 'records:deleteindex' %}">Delete</a></li>
             <li><a href="{% url 'admin:index' %}">Admin</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image:url({{STATIC_URL}}img/bg.png);">
       <div class="container">
       {% block title %}
 
@@ -61,21 +61,21 @@
           <img class="img-rounded" src="{{STATIC_URL}}img/crime.png" alt="report image">
           <h2>Blotter and Case Reports.</h2>
           <p>Bacon ipsum dolor sit amet meatloaf ham hock pig pork loin chicken, strip steak bresaola tail sirloin kevin t-bone prosciutto hamburger frankfurter. Shoulder hamburger doner porchetta pork loin pancetta biltong jowl. T-bone sirloin strip steak chuck, porchetta fatback capicola pastrami corned beef turducken doner beef ribs spare ribs andouille. Spare ribs frankfurter shankle, turducken pork loin shoulder pork brisket meatloaf.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="{% url 'records:listcrime' %}" role="button">View database &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
           <img class="img-rounded" src="{{STATIC_URL}}img/mans.png" alt="agent image">
           <h2>Keepers of Peace.</h2>
           <p>Jowl corned beef landjaeger tri-tip, porchetta sirloin venison. Short ribs salami ham prosciutto beef ribs swine. Strip steak shoulder chicken frankfurter capicola sausage tail t-bone beef ribs boudin pork bresaola prosciutto. Salami pastrami leberkas bresaola venison jowl chuck ham hock flank t-bone beef ribs pork loin tongue jerky doner.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="{% url 'records:listagent' %}" role="button">View database &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
           <img class="img-rounded" src="{{STATIC_URL}}img/criminals.png" alt="criminal image">
           <h2>Criminal Records.</h2>
           <p>Flank shankle jerky, doner spare ribs chuck bacon corned beef meatball. Ribeye short ribs tail prosciutto beef ribs beef kielbasa landjaeger. Prosciutto landjaeger beef ribs, salami t-bone leberkas boudin short ribs ham hock ground round meatball pork loin frankfurter. Swine tail chuck, shank cow tongue prosciutto kevin porchetta bresaola ham frankfurter short ribs. Biltong andouille flank, pancetta brisket salami shankle turducken drumstick porchetta shank.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="{% url 'records:listsuspect' %}" role="button">View database &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
   </div>

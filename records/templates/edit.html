@@ -2,21 +2,17 @@
 
 {% block content %}
 <!-- ############################################################################## -->
-<h2>VIEW</h2>
+<h2>EDIT</h2>
 
 {% if agent_list %}
     <table class="table table-hover">
     <tr>
 	    <th>Name</th>
-        <th>Police ID</th>
-        <th>Current Location</th>
     </tr>
 
     {% for agent in agent_list %}
     </tr>
-		<td><a href="#">{{agent.name}}</a></td>
-        <td>{{agent.policeid}}</td>
-        <td>{{agent.place}}</td>
+		<td><a href="{% url 'records:editagent' agent.id %}">{{agent.name}}</td>
 	</tr>
     {% endfor %}
     </table>
@@ -29,13 +25,11 @@
     <table class="table table-hover">
     <tr>
 	    <th>Name</th>
-        <th>Current Location</th>
     </tr>
 
     {% for suspect in suspect_list %}
     <tr>
-		<td><a href="#">{{suspect.name}}</a></td>
-        <td>{{suspect.place}}</td>
+		<td><a href="{% url 'records:editsuspect' suspect.id %}">{{suspect.name}}</a></td>
 	</tr>
     {% endfor %}
     </table>
@@ -49,14 +43,12 @@
     <tr>
 	    <th>Classification</th>
 	    <th>Time and Date Reported</th>
-        <th>Suspect Involved</th>
     </tr>
 
     {% for crime in crime_list %}
 		<tr>
-			<td><a href="#">{{crime.classification}}</td>
+			<td><a href="{% url 'records:editcrime' crime.id %}">{{crime.classification}}</td>
 			<td>{{crime.time}}</td></a>
-            <td>{{crime.criminal}} </td>
 		</tr>
     {% endfor %}
     </table>

@@ -104,3 +104,29 @@ if DEBUG:
     BOOTSTRAP=(
         os.path.join(BASE_DIR, "static", "bootstrap"),
     )
+
+# Create Crimes 
+# Create Suspects 
+# Create Agents 
+# Create Other
+
+# Update Crimes
+# Update Suspects
+# Update Agents
+#       Update Locations - 5pts
+
+# Delete Crimes
+# Delete Suspects
+# Delete Agents
+# Confirmation & No Cascade
+
+# Paginated List of Crimes 
+# Paginated List of Suspects 
+# Paginated List of Agents
+
+#       Searching and Filtering the List of Crimes - 5pts
+#       Searching and Filtering the List of Suspects - 5pt
+#       Searching and Filtering the List of Agents - 5pts
+
+#       Paginated Criminal History - 5pts
+#       Paginated List of Investigating Offcers - 5pts

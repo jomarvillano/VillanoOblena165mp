@@ -37,3 +37,13 @@ class Crime(models.Model):
 	criminal = models.ForeignKey(Suspect, null=True, blank=True, default = None, on_delete=models.SET_NULL)
 	def __unicode__(self):
 		return smart_unicode(self.id)
+
+
+class News(models.Model):
+    title = models.CharField(max_length=60)
+    author = models.CharField(max_length = 100)
+    pub_date = models.DateTimeField(editable=True)
+    body = models.TextField()
+
+    def __unicode__(self):
+        return self.title
