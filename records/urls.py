@@ -22,8 +22,8 @@ urlpatterns = patterns('',
 	url(r'^crime/$', 'records.views.editcrime', name='crime'),
 	url(r'^crime/(?P<id>\d+)/$', 'records.views.editcrime', name='editcrime'),
 
-	url(r'^news/$', 'records.views.editnews', name='news'),
-	url(r'^news/(?P<id>\d+)/$', 'records.views.editnews', name='editnews'),
+	url(r'^race/$', 'records.views.editrace', name='race'),
+	url(r'^race/(?P<id>\d+)/$', 'records.views.editrace', name='editrace'),
 
 	url(r'^location/(?P<id>\d+)/$', 'records.views.editlocation', name='editlocation'),
 #------------------------------------------------------------------------------------------#
@@ -42,9 +42,9 @@ urlpatterns = patterns('',
 	url(r'^list/crime$', views.CrimeList.as_view(), name='listcrime'),	
 
 	url(r'^list/agentsedit$', views.AgentListEdit.as_view(), name='listagentedit'),
-	url(r'^list/suspects$', views.SuspectListEdit.as_view(), name='listsuspectedit'),
-	url(r'^list/crime$', views.CrimeListEdit.as_view(), name='listcrimeedit'),
-	url(r'^list/location$', views.LocationListEdit.as_view(), name='listlocationedit'),
+	url(r'^list/suspectsedit$', views.SuspectListEdit.as_view(), name='listsuspectedit'),
+	url(r'^list/crimeedit$', views.CrimeListEdit.as_view(), name='listcrimeedit'),
+	url(r'^list/locationedit$', views.LocationListEdit.as_view(), name='listlocationedit'),
 
 	url(r'^list/agentsdelete$', views.AgentListDelete.as_view(), name='listagentdelete'),
 	url(r'^list/suspectsdelete$', views.SuspectListDelete.as_view(), name='listsuspectdelete'),

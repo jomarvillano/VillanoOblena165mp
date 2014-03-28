@@ -30,6 +30,11 @@ input, select, textarea{
     margin-right: auto;
 }
 
+body{
+  background-image: url(/static/img/wallpaper.png);
+  color: #fff;
+}
+
 /*animate.css*/
 .animated {
   -webkit-animation-duration: 1s;

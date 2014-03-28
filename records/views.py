@@ -120,28 +120,28 @@ def editsuspect(request, id=None):
 
 	return render_to_response('forms.html', context, context_instance=RequestContext(request))
 
-def editnews(request, id=None):
+def editrace(request, id=None):
 	if id:
-		news = get_object_or_404(News, pk=id)
+		race = get_object_or_404(Race, pk=id)
 	else:
-		news = News()
+		race = Race()
 
 	if request.POST:
-		form = NewsForm(request.POST, instance=news)
+		form = RaceForm(request.POST, instance=race)
 		if form.is_valid():
 			save_it = form.save(commit=False)
 			save_it.save()
 			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
 			return HttpResponseRedirect('')
 	else:
-		form = NewsForm(instance=news)
+		form = RaceForm(instance=race)
 
 	if id:
-		context = {'title': 'Edit News',
+		context = {'title': 'Edit Race',
 				'form' : form,
 		}
 	else:
-		context = {'title': 'New News',
+		context = {'title': 'New Race',
 				'form' : form,
 		}
 
@@ -165,11 +165,11 @@ def editlocation(request, id=None):
 		form = LocationForm(instance=location)
 
 	if id:
-		context = {'title': 'Edit News',
+		context = {'title': 'Edit Location',
 				'form' : form,
 		}
 	else:
-		context = {'title': 'New News',
+		context = {'title': 'New Location',
 				'form' : form,
 		}
 
@@ -250,6 +250,7 @@ def deletecrime(request, id=None):
 class AgentListEdit(generic.ListView):
 	template_name = 'edit.html'
 	context_object_name = 'agent_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Agent.objects.all().order_by('name')
@@ -257,6 +258,7 @@ class AgentListEdit(generic.ListView):
 class SuspectListEdit(generic.ListView):
 	template_name = 'edit.html'
 	context_object_name = 'suspect_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Suspect.objects.all().order_by('name')   
@@ -264,6 +266,7 @@ class SuspectListEdit(generic.ListView):
 class CrimeListEdit(generic.ListView):
 	template_name = 'edit.html'
 	context_object_name = 'crime_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Crime.objects.all().order_by('-time')
@@ -271,6 +274,7 @@ class CrimeListEdit(generic.ListView):
 class LocationListEdit(generic.ListView):
 	template_name = 'edit.html'
 	context_object_name = 'location_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Location.objects.all().order_by('name')
@@ -279,6 +283,7 @@ class LocationListEdit(generic.ListView):
 class AgentList(generic.ListView):
 	template_name = 'view.html'
 	context_object_name = 'agent_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Agent.objects.all().order_by('name')
@@ -286,6 +291,7 @@ class AgentList(generic.ListView):
 class SuspectList(generic.ListView):
 	template_name = 'view.html'
 	context_object_name = 'suspect_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Suspect.objects.all().order_by('name')   
@@ -293,6 +299,7 @@ class SuspectList(generic.ListView):
 class CrimeList(generic.ListView):
 	template_name = 'view.html'
 	context_object_name = 'crime_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Crime.objects.all().order_by('-time')
@@ -302,6 +309,7 @@ class CrimeList(generic.ListView):
 class AgentListDelete(generic.ListView):
 	template_name = 'delete.html'
 	context_object_name = 'agent_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Agent.objects.all().order_by('name')
@@ -309,6 +317,7 @@ class AgentListDelete(generic.ListView):
 class SuspectListDelete(generic.ListView):
 	template_name = 'delete.html'
 	context_object_name = 'suspect_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Suspect.objects.all().order_by('name')   
@@ -316,6 +325,7 @@ class SuspectListDelete(generic.ListView):
 class CrimeListDelete(generic.ListView):
 	template_name = 'delete.html'
 	context_object_name = 'crime_list'
+	paginate_by = 10 
 	
 	def get_queryset(self):
 		return Crime.objects.all().order_by('-time')

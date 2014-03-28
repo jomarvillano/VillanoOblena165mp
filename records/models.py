@@ -4,27 +4,33 @@ from django.utils.encoding import smart_unicode
 
 class Category(models.Model):
 	name = models.CharField(max_length = 100)
-	info = models.TextField(blank=True, default = None)
+	info = models.TextField(blank=True, default = None, null=True)
 	def __unicode__(self):
 		return self.name
 
 class Location(models.Model):
 	name = models.CharField(max_length = 100)
 	def __unicode__(self):
-		return self.name	
+		return self.name
+
+class Race(models.Model):
+	name = models.CharField(max_length=60)
+
+	def __unicode__(self):
+		return self.title	
 
 class Agent(models.Model):
 	name = models.CharField(max_length = 100)
 	place = models.ForeignKey(Location, default = None, on_delete=models.SET_DEFAULT)
-	race = models.CharField(max_length = 100)
+	race = models.ForeignKey(Race, null=True, blank=True, default = None, on_delete=models.SET_NULL)
 	policeid = models.CharField(max_length = 100)
 	def __unicode__(self):
 		return self.name
 
 class Suspect(models.Model):
 	name = models.CharField(max_length = 100)
-	place = models.ForeignKey(Location, default = None, on_delete=models.SET_DEFAULT)
-	race = models.CharField(max_length = 100)
+	place = models.ForeignKey(Location, null=True, blank=True, default = None, on_delete=models.SET_NULL)
+	race = models.ForeignKey(Race, null=True, blank=True, default = None, on_delete=models.SET_NULL)
 	def __unicode__(self):
 		return self.name
 
@@ -38,12 +44,3 @@ class Crime(models.Model):
 	def __unicode__(self):
 		return smart_unicode(self.id)
 
-
-class News(models.Model):
-    title = models.CharField(max_length=60)
-    author = models.CharField(max_length = 100)
-    pub_date = models.DateTimeField(editable=True)
-    body = models.TextField()
-
-    def __unicode__(self):
-        return self.title
