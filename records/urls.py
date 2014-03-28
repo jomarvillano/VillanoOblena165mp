@@ -24,6 +24,8 @@ urlpatterns = patterns('',
 
 	url(r'^news/$', 'records.views.editnews', name='news'),
 	url(r'^news/(?P<id>\d+)/$', 'records.views.editnews', name='editnews'),
+
+	url(r'^location/(?P<id>\d+)/$', 'records.views.editlocation', name='editlocation'),
 #------------------------------------------------------------------------------------------#
 	#DELETE
 #------------------------------------------------------------------------------------------#
@@ -42,6 +44,7 @@ urlpatterns = patterns('',
 	url(r'^list/agentsedit$', views.AgentListEdit.as_view(), name='listagentedit'),
 	url(r'^list/suspects$', views.SuspectListEdit.as_view(), name='listsuspectedit'),
 	url(r'^list/crime$', views.CrimeListEdit.as_view(), name='listcrimeedit'),
+	url(r'^list/location$', views.LocationListEdit.as_view(), name='listlocationedit'),
 
 	url(r'^list/agentsdelete$', views.AgentListDelete.as_view(), name='listagentdelete'),
 	url(r'^list/suspectsdelete$', views.SuspectListDelete.as_view(), name='listsuspectdelete'),

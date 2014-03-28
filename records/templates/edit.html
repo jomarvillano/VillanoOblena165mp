@@ -2,8 +2,6 @@
 
 {% block content %}
 <!-- ############################################################################## -->
-<h2>EDIT</h2>
-
 {% if agent_list %}
     <table class="table table-hover">
     <tr>
@@ -50,6 +48,22 @@
 			<td><a href="{% url 'records:editcrime' crime.id %}">{{crime.classification}}</td>
 			<td>{{crime.time}}</td></a>
 		</tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p></p>
+{% endif %}
+
+{% if location_list %}
+    <table class="table table-hover">
+    <tr>
+        <th>Name</th>
+    </tr>
+
+    {% for location in location_list %}
+        <tr>
+            <td><a href="{% url 'records:editlocation' location.id %}">{{location.name}}</td>
+        </tr>
     {% endfor %}
     </table>
 {% else %}

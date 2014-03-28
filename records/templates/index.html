@@ -1,0 +1,47 @@
+{% extends 'blank.html' %}
+
+{% block content %}
+
+{% if type == 'add' %}
+<!-- #..................................................................# -->
+	<h1>Add New Data:</h1>
+	<h2>
+	<ul>
+		<li><a href="{% url 'records:agent' %}">Add Agent</a></li>
+		<li><a href="{% url 'records:suspect' %}">Add Suspect</a></li>
+		<li><a href="{% url 'records:crime' %}">Add Crime</a></li>
+		<li><a href="{% url 'records:news' %}">Add News</a></li>
+	</ul>
+	</h2>
+<!-- #..................................................................# -->
+{% elif type == 'edit' %}
+	<h1>Edit Existing Data:</h1>
+	<h2>
+	<ul>
+		<li><a href="{% url 'records:listagentedit' %}">Edit Agents</a></li>
+		<li><a href="{% url 'records:listsuspectedit' %}">Edit Suspects</a></li>
+		<li><a href="{% url 'records:listcrimeedit' %}">Edit Crimes</a></li>
+		<li><a href="{% url 'records:listlocationedit' %}">Edit Location</a></li>
+	</ul>
+	</h2>
+{% elif type == 'delete' %}
+	<h1>Delete Existing Data:</h1>
+	<h2>
+	<ul>
+		<li><a href="{% url 'records:listagentdelete' %}">Delete Agents</a></li>
+		<li><a href="{% url 'records:listsuspectdelete' %}">Delete Suspects</a></li>
+		<li><a href="{% url 'records:listcrimedelete' %}">Delete Crimes</a></li>
+	</ul>
+	</h2>
+{% elif type == 'view' %}
+	<h1>View Data:</h1>
+	<h2>
+	<ul>
+		<li><a href="{% url 'records:listagent' %}">View Agents</a></li>
+		<li><a href="{% url 'records:listsuspect' %}">View Suspects</a></li>
+		<li><a href="{% url 'records:listcrime' %}">View Crimes</a></li>
+	</ul>
+	</h2>
+{% endif %}
+
+{% endblock %}

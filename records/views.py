@@ -12,16 +12,28 @@ def home(request):
 	return render_to_response("home.html", locals(), context_instance=RequestContext(request))
 
 def addindex(request):
-	return render_to_response("cindex.html", locals(), context_instance=RequestContext(request))
+	context = {
+		'type' : 'add'
+	}
+	return render_to_response("index.html", context, context_instance=RequestContext(request))
 
 def editindex(request):
-	return render_to_response("eindex.html", locals(), context_instance=RequestContext(request))
+	context = {
+		'type' : 'edit'
+	}
+	return render_to_response("index.html", context, context_instance=RequestContext(request))
 
 def viewindex(request):
-	return render_to_response("vindex.html", locals(), context_instance=RequestContext(request))
+	context = {
+		'type' : 'view'
+	}
+	return render_to_response("index.html", context, context_instance=RequestContext(request))
 
 def deleteindex(request):
-	return render_to_response("dindex.html", locals(), context_instance=RequestContext(request))
+	context = {
+		'type' : 'delete'
+	}
+	return render_to_response("index.html", context, context_instance=RequestContext(request))
 
 #------------------------------------------------------------------------------------------#
  	#Edit and Add Specific
@@ -136,6 +148,34 @@ def editnews(request, id=None):
 
 	return render_to_response('forms.html', context, context_instance=RequestContext(request))
 
+def editlocation(request, id=None):
+	if id:
+		location = get_object_or_404(Location, pk=id)
+	else:
+		location = Location()
+
+	if request.POST:
+		form = LocationForm(request.POST, instance=location)
+		if form.is_valid():
+			save_it = form.save(commit=False)
+			save_it.save()
+			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
+			return HttpResponseRedirect('')
+	else:
+		form = LocationForm(instance=location)
+
+	if id:
+		context = {'title': 'Edit News',
+				'form' : form,
+		}
+	else:
+		context = {'title': 'New News',
+				'form' : form,
+		}
+
+
+	return render_to_response('forms.html', context, context_instance=RequestContext(request))
+
 #------------------------------------------------------------------------------------------#
  	#Delete Specific
 #------------------------------------------------------------------------------------------#
@@ -202,9 +242,11 @@ def deletecrime(request, id=None):
 	crime.delete()
 
 	return render_to_response('dindex.html', locals(), context_instance=RequestContext(request))
+
 #------------------------------------------------------------------------------------------#
-	#Read, Edit, Delete listing (Optimize!)
+	#Read, Edit, Delete Listing (Optimize!)
 #------------------------------------------------------------------------------------------#
+
 class AgentListEdit(generic.ListView):
 	template_name = 'edit.html'
 	context_object_name = 'agent_list'
@@ -226,6 +268,12 @@ class CrimeListEdit(generic.ListView):
 	def get_queryset(self):
 		return Crime.objects.all().order_by('-time')
 
+class LocationListEdit(generic.ListView):
+	template_name = 'edit.html'
+	context_object_name = 'location_list'
+	
+	def get_queryset(self):
+		return Location.objects.all().order_by('name')
 #------------------------------------------------------------------------------------------#
 
 class AgentList(generic.ListView):

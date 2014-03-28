@@ -113,7 +113,7 @@ if DEBUG:
 # Update Crimes
 # Update Suspects
 # Update Agents
-#       Update Locations - 5pts
+# Update Locations
 
 # Delete Crimes
 # Delete Suspects
