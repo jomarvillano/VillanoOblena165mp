@@ -555,6 +555,7 @@ def viewrecord(request, id=None):
 			'crime_list': crime_list,
 			'title': suspect.name,
 			'paginator': True,
+			'button':True,
 		}
 	)
 

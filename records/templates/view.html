@@ -76,8 +76,11 @@
     {% endfor %}
     </table>
 
+{% if not button %}
 <a class="btn btn-default" href="{% url 'records:searchcrimes' %}" role="button">Search Crimes</a>
 <br>
+{% endif %}
+
 {% else %}
     <p></p>
 {% endif %}
