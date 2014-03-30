@@ -2,10 +2,11 @@ from django.shortcuts import render, render_to_response, RequestContext, HttpRes
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.views import generic
-from django.db.models import Q
+from django.db.models import Q, Sum
 
 from .forms import *
 from .models import *
+from chartit import DataPool, Chart, PivotDataPool, PivotChart
 # Create your views here.
 
 #------------------------------------------------------------------------------------------#
@@ -587,3 +588,25 @@ def viewagents(request, id=None):
 	)
 
 	return render_to_response('view.html', variables)
+
+#------------------------------------------------------------------------------------------#
+	#Charts
+#------------------------------------------------------------------------------------------#
+
+def crime_chart_view(request):
+	ds = PivotDataPool(
+		series= [
+			{'options':{
+				'source': Crime.objects.all(),
+				'categories': 'classification__name'},
+			'terms': {
+				'tot_crime':Sum('id')}}])
+
+	pivcht = PivotChart(
+		datasource = ds, 
+		series_options = [
+			{'options': {
+				'type': 'column'},
+			'terms': ['tot_crime']}])
+
+	return render_to_response('charts.html', {'crimechart': pivcht})

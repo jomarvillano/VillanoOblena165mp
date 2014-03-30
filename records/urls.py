@@ -58,4 +58,6 @@ urlpatterns = patterns('',
 
 	url(r'^suspect/view/(?P<id>\d+)/$', 'records.views.viewrecord', name='viewrecord'),
 	url(r'^crime/view/(?P<id>\d+)/$', 'records.views.viewagents', name='viewagent'),
+
+	url(r'^charts/$', 'records.views.crime_chart_view', name='crimechartview'),
 )

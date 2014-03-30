@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+CHARTIT_DIR = os.path.split(os.path.dirname(__file__))[0]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'records',
+    'chartit',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -93,6 +94,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, "static", "static"),
 )
+CHARTIT_JS_REL_PATH = '/chartit/js/'
 
 if DEBUG:
     MEDIA_URL = '/media/'
