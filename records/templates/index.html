@@ -4,44 +4,67 @@
 
 {% if type == 'add' %}
 <!-- #..................................................................# -->
-	<h1>Add New Data:</h1>
+	<h1>Add New Data</h1>
+	<a href="{% url 'records:crime' %}"><img class="img-rounded" src="{{STATIC_URL}}img/addcrime.png" alt="report image" a href="{% url 'records:agent' %}"></li></a>
+	<hr>
+	
+	<p>Warning! These forms are for authorized personnel only. Unverified additions are punishable by law.</p>
 	<h2>
 	<ul>
-		<li><a href="{% url 'records:agent' %}">Add Agent</a></li>
-		<li><a href="{% url 'records:suspect' %}">Add Suspect</a></li>
-		<li><a href="{% url 'records:crime' %}">Add Crime</a></li>
-		<li><a href="{% url 'records:race' %}">Add Race</a></li>
+		<li style="display: inline;"><a class="btn btn-success btn-lg" href="{% url 'records:agent' %}">Add Agent</a></li>
+		<li style="display: inline;"><a class="btn btn-success btn-lg"href="{% url 'records:suspect' %}">Add Suspect</a></li>
+		<li style="display: inline;"><a class="btn btn-success btn-lg" href="{% url 'records:race' %}">Add Race</a></li>
 	</ul>
 	</h2>
 <!-- #..................................................................# -->
 {% elif type == 'edit' %}
-	<h1>Edit Existing Data:</h1>
+	<h1>Edit Existing Data</h1>
+	<p>Warning! These forms are for authorized personnel only. Unverified edits are punishable by law.</p>
 	<h2>
 	<ul>
-		<li><a href="{% url 'records:listagentedit' %}">Edit Agents</a></li>
-		<li><a href="{% url 'records:listsuspectedit' %}">Edit Suspects</a></li>
-		<li><a href="{% url 'records:listcrimeedit' %}">Edit Crimes</a></li>
-		<li><a href="{% url 'records:listlocationedit' %}">Edit Location</a></li>
+		<li style="display: inline;"><a class="btn btn-warning btn-lg" href="{% url 'records:listagentedit' %}">Edit Agents</a></li>
+		<li style="display: inline;"><a class="btn btn-warning btn-lg" href="{% url 'records:listsuspectedit' %}">Edit Suspects</a></li>
+		<li style="display: inline;"><a class="btn btn-warning btn-lg" href="{% url 'records:listcrimeedit' %}">Edit Crimes</a></li>
+		<li style="display: inline;"><a class="btn btn-warning btn-lg" href="{% url 'records:listlocationedit' %}">Edit Location</a></li>
 	</ul>
 	</h2>
 {% elif type == 'delete' %}
-	<h1>Delete Existing Data:</h1>
+	<h1>Delete Existing Data</h1>
+	<p>Warning! These forms are for authorized personnel only. Unverified deletes are punishable by law.</p>
 	<h2>
 	<ul>
-		<li><a href="{% url 'records:listagentdelete' %}">Delete Agents</a></li>
-		<li><a href="{% url 'records:listsuspectdelete' %}">Delete Suspects</a></li>
-		<li><a href="{% url 'records:listcrimedelete' %}">Delete Crimes</a></li>
+		<li style="display: inline;"><a class="btn btn-danger btn-lg" href="{% url 'records:listagentdelete' %}">Delete Agents</a></li>
+		<li style="display: inline;"><a class="btn btn-danger btn-lg" href="{% url 'records:listsuspectdelete' %}">Delete Suspects</a></li>
+		<li style="display: inline;"><a class="btn btn-danger btn-lg" href="{% url 'records:listcrimedelete' %}">Delete Crimes</a></li>
 	</ul>
 	</h2>
 {% elif type == 'view' %}
-	<h1>View Data:</h1>
-	<h2>
-	<ul>
-		<li><a href="{% url 'records:listagent' %}">View Agents</a></li>
-		<li><a href="{% url 'records:listsuspect' %}">View Suspects</a></li>
-		<li><a href="{% url 'records:listcrime' %}">View Crimes</a></li>
-	</ul>
-	</h2>
+	<div class="container marketing">
+	   <h1>View Database</h1>
+	      <div class="row">
+	        <div class="col-lg-4">
+
+	          <img class="img-rounded" src="{{STATIC_URL}}img/crime.png" alt="report image">
+	          <h2>Blotter and Case Reports.</h2>
+	          <p>Bacon ipsum dolor sit amet meatloaf ham hock pig pork loin chicken, strip steak bresaola tail sirloin kevin t-bone prosciutto hamburger frankfurter. Shoulder hamburger doner porchetta pork loin pancetta biltong jowl. T-bone sirloin strip steak chuck, porchetta fatback capicola pastrami corned beef turducken doner beef ribs spare ribs andouille. Spare ribs frankfurter shankle, turducken pork loin shoulder pork brisket meatloaf.Strip steak shoulder chicken frankfurter capicola.</p>
+	          <p><a class="btn btn-primary" href="{% url 'records:listcrime' %}" role="button">View database &raquo;</a></p>
+	        </div><!-- /.col-lg-4 -->
+
+	        <div class="col-lg-4">
+	          <img class="img-rounded" src="{{STATIC_URL}}img/mans.png" alt="agent image">
+	          <h2>Keepers of Peace.</h2>
+	          <p>Jowl corned beef landjaeger tri-tip, porchetta sirloin venison. Short ribs salami ham prosciutto beef ribs swine. Strip steak shoulder chicken frankfurter capicola sausage tail t-bone beef ribs boudin pork bresaola prosciutto. Salami pastrami leberkas bresaola venison jowl chuck ham hock flank t-bone beef ribs pork loin tongue jerky doner.Prosciutto landjaeger beef ribs, salami t-bone leberkas boudin short ribs ham hock ground round meatball pork loin frankfurter. </p>
+	          <p><a class="btn btn-primary" href="{% url 'records:listagent' %}" role="button">View database &raquo;</a></p>
+	        </div><!-- /.col-lg-4 -->
+
+	        <div class="col-lg-4">
+	          <img class="img-rounded" src="{{STATIC_URL}}img/criminals.png" alt="criminal image">
+	          <h2>Criminal Records.</h2>
+	          <p>Flank shankle jerky, doner spare ribs chuck bacon corned beef meatball. Ribeye short ribs tail prosciutto beef ribs beef kielbasa landjaeger. Prosciutto landjaeger beef ribs, salami t-bone leberkas boudin short ribs ham hock ground round meatball pork loin frankfurter. Swine tail chuck, shank cow tongue prosciutto kevin porchetta bresaola ham frankfurter short ribs. Biltong andouille flank, pancetta brisket salami shankle turducken drumstick porchetta shank.</p>
+	          <p><a class="btn btn-primary" href="{% url 'records:listsuspect' %}" role="button">View database &raquo;</a></p>
+	        </div><!-- /.col-lg-4 -->
+	      </div><!-- /.row -->
+	</div>
 {% endif %}
 
 {% endblock %}

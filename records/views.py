@@ -1,8 +1,11 @@
 from django.shortcuts import render, render_to_response, RequestContext, HttpResponseRedirect, get_object_or_404
-from .forms import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
-from .models import *
 from django.views import generic
+from django.db.models import Q
+
+from .forms import *
+from .models import *
 # Create your views here.
 
 #------------------------------------------------------------------------------------------#
@@ -224,24 +227,33 @@ def deleteagent(request, id=None):
 		agent = get_object_or_404(Agent, pk=id)
 
 	agent.delete()
+	context = {
+		'type' : 'delete'
+	}
 
-	return render_to_response('dindex.html', locals(), context_instance=RequestContext(request))
+	return render_to_response('index.html', context, context_instance=RequestContext(request))
 
 def deletesuspect(request, id=None):
 	if id:
 		suspect = get_object_or_404(Suspect, pk=id)
 
 	suspect.delete()
+	context = {
+		'type' : 'delete'
+	}
 
-	return render_to_response('dindex.html', locals(), context_instance=RequestContext(request))
+	return render_to_response('index.html', context, context_instance=RequestContext(request))
 
 def deletecrime(request, id=None):
 	if id:
 		crime = get_object_or_404(Crime, pk=id)
 
 	crime.delete()
+	context = {
+		'type' : 'delete'
+	}
 
-	return render_to_response('dindex.html', locals(), context_instance=RequestContext(request))
+	return render_to_response('index.html', context, context_instance=RequestContext(request))
 
 #------------------------------------------------------------------------------------------#
 	#Read, Edit, Delete Listing (Optimize!)
@@ -330,3 +342,229 @@ class CrimeListDelete(generic.ListView):
 	def get_queryset(self):
 		return Crime.objects.all().order_by('-time')
 
+#------------------------------------------------------------------------------------------#
+	#Search
+#------------------------------------------------------------------------------------------#
+#classess are: bookmark,link and user
+
+def search_agent(request):
+	form = SearchForm()
+	agents = []
+	show_results=False
+	query=""
+
+	if request.GET.has_key('query'):
+		show_results=True
+		query=request.GET['query'].strip()
+		if query:
+			form=SearchForm({'query': query})
+			agents = \
+				Agent.objects.filter(Q(name__icontains=query))
+
+    
+	paginator = Paginator(agents, 10)
+	page = request.GET.get('page')
+	try:
+		agents = paginator.page(page)
+	except PageNotAnInteger:
+		agents = paginator.page(1)
+	except EmptyPage:
+		agents = paginator.page(paginator.num_pages)
+
+
+	variables = RequestContext(request, 
+		{	'form': form,
+			'agent_list': agents,
+			'show_results': show_results,
+			'is_paginated': True,
+			'query': query,
+		}
+	)
+
+	return render_to_response('search.html', variables)
+
+def search_agent_loc(request):
+	form = SearchForm()
+	agents = []
+	show_results=False
+	query=""
+
+	if request.GET.has_key('query'):
+		show_results=True
+		query=request.GET['query'].strip()
+		if query:
+			form=SearchForm({'query': query})
+			agents = \
+				Agent.objects.filter(place__name__startswith=query)
+
+    
+	paginator = Paginator(agents, 10)
+	page = request.GET.get('page')
+	try:
+		agents = paginator.page(page)
+	except PageNotAnInteger:
+		agents = paginator.page(1)
+	except EmptyPage:
+		agents = paginator.page(paginator.num_pages)
+
+
+	variables = RequestContext(request, 
+		{	'form': form,
+			'agent_list': agents,
+			'show_results': show_results,
+			'is_paginated': True,
+			'query': query,
+		}
+	)
+
+	return render_to_response('search.html', variables)
+
+def search_suspect(request):
+	form = SearchForm()
+	suspects = []
+	show_results=False
+	query=""
+
+	if request.GET.has_key('query'):
+		show_results=True
+		query=request.GET['query'].strip()
+		if query:
+			form=SearchForm({'query': query})
+			suspects = \
+				Suspect.objects.filter(Q(name__icontains=query))
+
+    
+	paginator = Paginator(suspects, 10)
+	page = request.GET.get('page')
+	try:
+		suspects = paginator.page(page)
+	except PageNotAnInteger:
+		suspects = paginator.page(1)
+	except EmptyPage:
+		suspects = paginator.page(paginator.num_pages)
+
+
+	variables = RequestContext(request, 
+		{	'form': form,
+			'suspect_list': suspects,
+			'show_results': show_results,
+			'is_paginated': True,
+			'query': query,
+		}
+	)
+
+	return render_to_response('search.html', variables)
+
+def search_suspect_loc(request):
+	form = SearchForm()
+	agents = []
+	show_results=False
+	query=""
+
+	if request.GET.has_key('query'):
+		show_results=True
+		query=request.GET['query'].strip()
+		if query:
+			form=SearchForm({'query': query})
+			agents = \
+				Suspect.objects.filter(place__name__startswith=query)
+
+    
+	paginator = Paginator(agents, 10)
+	page = request.GET.get('page')
+	try:
+		agents = paginator.page(page)
+	except PageNotAnInteger:
+		agents = paginator.page(1)
+	except EmptyPage:
+		agents = paginator.page(paginator.num_pages)
+
+
+	variables = RequestContext(request, 
+		{	'form': form,
+			'suspect_list': agents,
+			'show_results': show_results,
+			'is_paginated': True,
+			'query': query,
+		}
+	)
+
+	return render_to_response('search.html', variables)
+
+def search_crime(request):
+	form = SearchForm()
+	agents = []
+	show_results=False
+	query=""
+
+	if request.GET.has_key('query'):
+		show_results=True
+		query=request.GET['query'].strip()
+		if query:
+			form=SearchForm({'query': query})
+			agents = \
+				Crime.objects.filter(classification__name__startswith=query).order_by('-time')
+
+    
+	paginator = Paginator(agents, 10)
+	page = request.GET.get('page')
+	try:
+		agents = paginator.page(page)
+	except PageNotAnInteger:
+		agents = paginator.page(1)
+	except EmptyPage:
+		agents = paginator.page(paginator.num_pages)
+
+	location = Location.objects.all().order_by('name')
+
+	variables = RequestContext(request, 
+		{	'form': form,
+			'crime_list': agents,
+			'show_results': show_results,
+			'is_paginated': True,
+			'query': query,
+			'location_list':location,
+		}
+	)
+
+	return render_to_response('search.html', variables)
+
+#------------------------------------------------------------------------------------------#
+	#Criminal Record
+#------------------------------------------------------------------------------------------#
+
+def viewrecord(request, id=None):
+	if id:
+		suspect = get_object_or_404(Suspect, pk=id)
+
+	crime_list = \
+		Crime.objects.filter(criminal=suspect).order_by('-time')
+
+	variables = RequestContext(request, 
+		{	
+			'crime_list': crime_list,
+			'title': suspect.name,
+			'is_paginated': True,
+		}
+	)
+
+	return render_to_response('view.html', variables)
+
+
+def viewagents(request, id=None):
+	if id:
+		crime = Crime.objects.get(pk=id)
+
+	agent_list = \
+		crime.officer.all()
+
+	variables = RequestContext(request, 
+		{	
+			'title': crime.classification,
+			'date' : crime.time,
+			'agent_list': agent_list,
+			'is_paginated': True,
+		}
+	)
+
+	return render_to_response('view.html', variables)

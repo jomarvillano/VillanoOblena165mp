@@ -124,9 +124,9 @@ if DEBUG:
 # Paginated List of Suspects 
 # Paginated List of Agents
 
-#       Searching and Filtering the List of Crimes - 5pts
-#       Searching and Filtering the List of Suspects - 5pt
-#       Searching and Filtering the List of Agents - 5pts
+# Searching and Filtering the List of Suspects
+# Searching and Filtering the List of Agents
 
-#       Paginated Criminal History - 5pts
-#       Paginated List of Investigating Offcers - 5pts
+#       Searching and Filtering the List of Crimes - 2.5pts
+# Paginated Criminal History
+# Paginated List of Investigating Offcers

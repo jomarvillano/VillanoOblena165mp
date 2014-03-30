@@ -50,9 +50,12 @@ urlpatterns = patterns('',
 	url(r'^list/suspectsdelete$', views.SuspectListDelete.as_view(), name='listsuspectdelete'),
 	url(r'^list/crimedelete$', views.CrimeListDelete.as_view(), name='listcrimedelete'),
 
-	# url(r'^location/$', LocationList.as_view(), name='locations'),
-	# url(r'^location/(?P<donation_id>\d+)/$', validate_donation, name='validate'),
+	url(r'^searchagents/$', 'records.views.search_agent', name='searchagents'),
+	url(r'^searchsuspects/$', 'records.views.search_suspect', name='searchsuspects'),
+	url(r'^searchcrimes/$', 'records.views.search_crime', name='searchcrimes'),
+	url(r'^searchagentsbyloc/$', 'records.views.search_agent_loc', name='searchagentsbyloc'),
+	url(r'^searchsuspectsbyloc/$', 'records.views.search_suspect_loc', name='searchsuspectsbyloc'),
 
-    # url(r'^$', views.IndexView.as_view(), name='index'),
-    # url(r'^$', 'addperson.views.home', name='home'),
+	url(r'^suspect/view/(?P<id>\d+)/$', 'records.views.viewrecord', name='viewrecord'),
+	url(r'^crime/view/(?P<id>\d+)/$', 'records.views.viewagents', name='viewagent'),
 )

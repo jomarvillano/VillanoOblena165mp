@@ -35,6 +35,10 @@ body{
   color: #fff;
 }
 
+.jumbotron {
+  background-color: rgba(255, 255, 255, 0);
+}
+
 /*animate.css*/
 .animated {
   -webkit-animation-duration: 1s;

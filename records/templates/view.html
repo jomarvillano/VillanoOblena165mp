@@ -2,7 +2,17 @@
 
 {% block content %}
 <!-- ############################################################################## -->
+{% if form %}
+    <div class="row">
+    <form id="search-form" method="get" action=".">
+      {{ form.as_p }}
+      <input type="submit" value="search" />
+    </form>
+    </div>
+{% endif %}
+
 {% if agent_list %}
+    <h2>{% if title %}{{title}} dated {{date}}<h3>Investigating officers</h3>{% endif %}</h2>
     <table class="table table-hover">
     <tr>
 	    <th>Name</th>
@@ -19,6 +29,8 @@
     {% endfor %}
     </table>
 
+<a class="btn btn-default" href="{% url 'records:searchagents' %}" role="button">Search Agents</a>
+<a class="btn btn-default" href="{% url 'records:searchagentsbyloc' %}" role="button">Filter by Location</a>
 {% else %}
     <p></p>
 {% endif %}
@@ -32,19 +44,23 @@
 
     {% for suspect in suspect_list %}
     <tr>
-		<td><a href="#">{{suspect.name}}</a></td>
+		<td><a href="{% url 'records:viewrecord' suspect.id %}">{{suspect.name}}</a></td>
         <td>{{suspect.place}}</td>
 	</tr>
     {% endfor %}
     </table>
 
+<a class="btn btn-default" href="{% url 'records:searchsuspects' %}" role="button">Search Suspects</a>
+<a class="btn btn-default" href="{% url 'records:searchsuspectsbyloc' %}" role="button">Filter by Location</a>
 {% else %}
     <p></p>
 {% endif %}
 
 {% if crime_list %}
+    <h2>{% if title %}{{title}}<h1><img src="{{STATIC_URL}}img/convict.png" alt="report image"></h1><h3>Record</h3>{% endif %}</h2>
     <table class="table table-hover">
     <tr>
+        <th>Crime ID</th>
 	    <th>Classification</th>
 	    <th>Time and Date Reported</th>
         <th>Suspect Involved</th>
@@ -52,12 +68,16 @@
 
     {% for crime in crime_list %}
 		<tr>
-			<td><a href="#">{{crime.classification}}</td>
+            <td>{{crime.id}}</td>
+			<td><a href="{% url 'records:viewagent' crime.id %}">{{crime.classification}}</td>
 			<td>{{crime.time}}</td></a>
-            <td>{{crime.criminal}} </td>
+            <td>{{crime.criminal}}</td>
 		</tr>
     {% endfor %}
     </table>
+
+<a class="btn btn-default" href="{% url 'records:searchcrimes' %}" role="button">Search Crimes</a>
+<br>
 {% else %}
     <p></p>
 {% endif %}

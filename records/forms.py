@@ -21,3 +21,9 @@ class RaceForm(forms.ModelForm):
 class LocationForm(forms.ModelForm):
 	class Meta:
 		model = Location
+
+class SearchForm(forms.Form):
+	query = forms.CharField(
+		label='Search',
+		widget=forms.TextInput(attrs={'size': 32})
+		)

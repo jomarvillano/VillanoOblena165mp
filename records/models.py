@@ -17,7 +17,7 @@ class Race(models.Model):
 	name = models.CharField(max_length=60)
 
 	def __unicode__(self):
-		return self.title	
+		return self.name	
 
 class Agent(models.Model):
 	name = models.CharField(max_length = 100)
