@@ -98,7 +98,7 @@
 </div>
 {% endif %}
 
-        {% if paginator and agent_list %}
+        {% if not is_paginated and paginator and agent_list %}
         <div class="pagination">
             <span class="step-links">
                 {% if agent_list.has_previous %}
@@ -116,7 +116,7 @@
         </div>
         {% endif %}
 
-        {% if paginator and crime_list %}
+        {% if not is_paginated and paginator and crime_list %}
         <div class="pagination">
             <span class="step-links">
                 {% if crime_list.has_previous %}

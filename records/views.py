@@ -566,7 +566,7 @@ def viewagents(request, id=None):
 		crime = Crime.objects.get(pk=id)
 
 	agent_list = \
-		crime.officer.all()
+		crime.officer.all().order_by('name')
 
 	paginator = Paginator(agent_list, 5)
 	page = request.GET.get('page')
