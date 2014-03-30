@@ -9,11 +9,11 @@ SPACE POLIZ
 165 MP
 Villano, Joshua
 Oblena Heinrich
----------------------------------------------------------------------------------------
+
 Requirements:
 1. Django-Postgres runnable environment
 2. configure the DATABASES section found in VillanoOblena165mp\VillanoOblena165mp\settings.py
----------------------------------------------------------------------------------------
+
 To populate database:
 
 Option 1:(DO THIS FIRST)
@@ -36,7 +36,7 @@ Option 2:
     9. createcrime(50)      #replace 50 with desired number of agents
     10. NOTE: createcrime() may frequently return invalid date/time errors. ignore and keep re-running createcrime()   until number of crimes desired have been reached
 11. DB is pre-loaded, go to RUN
----------------------------------------------------------------------------------------
+
 TO RUN (note: POPULATE FIRST):
 1. open cmd to the dir containing manage.py (e.g VillanoOblena165mp\manage.py)
 2. run python manage.py runserver
