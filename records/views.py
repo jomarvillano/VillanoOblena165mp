@@ -79,6 +79,7 @@ def editcrime(request, id=None):
 		if form.is_valid():
 			save_it = form.save(commit=False)
 			save_it.save()
+			form.save_m2m()
 			messages.success(request, "Edit successful.") if id else messages.success(request, "Successfully added.")
 			return HttpResponseRedirect('')
 	else:
@@ -540,11 +541,20 @@ def viewrecord(request, id=None):
 	crime_list = \
 		Crime.objects.filter(criminal=suspect).order_by('-time')
 
+	paginator = Paginator(crime_list, 5)
+	page = request.GET.get('page')
+	try:
+		crime_list = paginator.page(page)
+	except PageNotAnInteger:
+		crime_list = paginator.page(1)
+	except EmptyPage:
+		crime_list = paginator.page(paginator.num_pages)
+
 	variables = RequestContext(request, 
 		{	
 			'crime_list': crime_list,
 			'title': suspect.name,
-			'is_paginated': True,
+			'paginator': True,
 		}
 	)
 
@@ -558,12 +568,21 @@ def viewagents(request, id=None):
 	agent_list = \
 		crime.officer.all()
 
+	paginator = Paginator(agent_list, 5)
+	page = request.GET.get('page')
+	try:
+		agent_list = paginator.page(page)
+	except PageNotAnInteger:
+		agent_list = paginator.page(1)
+	except EmptyPage:
+		agent_list = paginator.page(paginator.num_pages)
+
 	variables = RequestContext(request, 
 		{	
 			'title': crime.classification,
 			'date' : crime.time,
 			'agent_list': agent_list,
-			'is_paginated': True,
+			'paginator': True,
 		}
 	)
 
